@@ -38,7 +38,7 @@ export function secretPostProcessor(ctx: WidgetContext): MarkdownPostProcessor {
       const text = node.data;
       const refs = findRefs(text);
       if (!refs.length) continue;
-      const frag = document.createDocumentFragment();
+      const frag = createFragment();
       let pos = 0;
       for (const { from, to, ref } of refs) {
         frag.append(text.slice(pos, from));

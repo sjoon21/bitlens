@@ -31,30 +31,33 @@ function electronClipboard(): ElectronClipboard | null {
 
 // Clears the clipboard later unless the user has copied something else since.
 // ponytail: `text` stays referenced by the timer for CLIPBOARD_CLEAR_MS, even across a lock.
-export async function copyWithExpiry(text: string): Promise<void> {
-  await navigator.clipboard.writeText(text);
-  window.setTimeout(async () => {
-    const electron = electronClipboard();
-    try {
-      if (electron) {
-        if (electron.readText() === text) electron.clear();
-      } else if ((await navigator.clipboard.readText()) === text) {
-        await navigator.clipboard.writeText("");
-      }
-    } catch {
-      // mobile WebViews may deny clipboard reads; clearing is best effort there
+async function clearClipboardIfUnchanged(text: string): Promise<void> {
+  const electron = electronClipboard();
+  try {
+    if (electron) {
+      if (electron.readText() === text) electron.clear();
+    } else if ((await navigator.clipboard.readText()) === text) {
+      await navigator.clipboard.writeText("");
     }
-  }, CLIPBOARD_CLEAR_MS);
+  } catch {
+    // mobile WebViews may deny clipboard reads; clearing is best effort there
+  }
 }
 
-export function iconButton(parent: HTMLElement, icon: string, label: string, onClick: () => void): HTMLButtonElement {
+export async function copyWithExpiry(text: string): Promise<void> {
+  await navigator.clipboard.writeText(text);
+  window.setTimeout(() => void clearClipboardIfUnchanged(text), CLIPBOARD_CLEAR_MS);
+}
+
+// onClick may be async; it must handle its own errors (callers show a Notice).
+export function iconButton(parent: HTMLElement, icon: string, label: string, onClick: () => void | Promise<void>): HTMLButtonElement {
   const btn = parent.createEl("button", { cls: "bw-secret-btn clickable-icon", attr: { "aria-label": label, type: "button" } });
   setIcon(btn, icon);
   btn.addEventListener("mousedown", (e) => e.preventDefault()); // keep the editor cursor where it is
   btn.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopPropagation();
-    onClick();
+    void onClick();
   });
   return btn;
 }

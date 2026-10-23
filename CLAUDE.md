@@ -1,12 +1,13 @@
 # BitLens (Obsidian plugin)
 
-Obsidian plugin that unlocks a Bitwarden vault client-side and (planned) renders `{{bw:Item:field}}` references in notes as masked widgets, so secrets never land in Markdown or `data.json`.
+Obsidian plugin that unlocks a Bitwarden vault client-side and renders `{{bw:Item:field}}` references in notes as masked widgets, so secrets never land in Markdown or `data.json`.
 
 ## Commands
 
 - `npm run build`: `tsc` type check + esbuild production bundle → `main.js`
 - `npm run dev`: esbuild watch
 - `npm test`: `node:test` via Node type stripping (`tests/*.test.ts`), no test framework
+- `npm run lint`: ESLint with `eslint-plugin-obsidianmd`, the same rules the Community directory scanner runs. Keep it at 0 errors (warnings don't block submission)
 - Manual test: copy `main.js`, `manifest.json`, `styles.css` into `<vault>/.obsidian/plugins/bitlens/` (folder name = manifest `id`)
 - Release: push a tag equal to `manifest.json` version (no `v`); `.github/workflows/release.yml` builds and attaches the assets to a draft release. Keep `versions.json` in sync
 

@@ -23,8 +23,7 @@ export class UnlockModal extends Modal {
     const error = form.createDiv({ cls: "bw-unlock-error", attr: { role: "alert" } });
     const button = form.createEl("button", { text: "Unlock", type: "submit", cls: "mod-cta" });
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+    const submit = async () => {
       if (!input.value) return;
       input.disabled = button.disabled = true;
       button.setText("Unlocking…");
@@ -43,6 +42,10 @@ export class UnlockModal extends Modal {
         button.setText("Unlock");
         input.select();
       }
+    };
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      void submit();
     });
     window.setTimeout(() => input.focus(), 0);
   }

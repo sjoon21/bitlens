@@ -40,7 +40,7 @@ export class VaultView extends ItemView {
   private readonly deps: VaultViewDeps;
   private query = "";
   private readonly expanded = new Set<string>();
-  private readonly tickers = new Set<() => void>();
+  private readonly tickers = new Set<() => Promise<void>>();
   private listEl: HTMLElement | null = null;
 
   constructor(leaf: WorkspaceLeaf, deps: VaultViewDeps) {
@@ -66,7 +66,7 @@ export class VaultView extends ItemView {
       if (this.deps.session.isUnlocked && this.listEl) this.renderList();
       else this.render();
     }));
-    this.registerInterval(window.setInterval(() => this.tickers.forEach((tick) => tick()), 1000));
+    this.registerInterval(window.setInterval(() => this.tickers.forEach((tick) => void tick()), 1000));
     this.render();
   }
 

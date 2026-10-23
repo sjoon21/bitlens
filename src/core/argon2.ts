@@ -16,5 +16,5 @@ export function argon2(password: Uint8Array, salt: Uint8Array, p: Argon2Params):
     p: p.parallelism,
     dkLen: 32,
     maxmem: p.memoryKiB * 1024 * 2, // the 1 GiB default would reject Bitwarden's 1024 MiB maximum
-  }) as Bytes;
+  });
 }

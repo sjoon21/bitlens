@@ -152,7 +152,8 @@ export default class BitwardenVaultPlugin extends Plugin {
   }
 
   async loadSettings() {
-    this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+    const saved = (await this.loadData()) as Partial<BitwardenPluginSettings> | null;
+    this.settings = { ...DEFAULT_SETTINGS, ...saved };
     if (!this.settings.deviceId) {
       this.settings.deviceId = crypto.randomUUID();
       await this.saveSettings();

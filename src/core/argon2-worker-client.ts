@@ -32,7 +32,7 @@ export function argon2InWorker(password: Uint8Array, salt: Uint8Array, params: A
       try {
         resolve(argon2(password, salt, params));
       } catch (err) {
-        reject(err);
+        reject(err instanceof Error ? err : new Error(String(err)));
       }
     };
     const req: Argon2Request = { password, salt, params };

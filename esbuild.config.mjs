@@ -16,13 +16,15 @@ const prod = process.argv[2] === "production";
 const inlineWorker = {
   name: "inline-worker",
   setup(build) {
+    // Relative path: esbuild prints it in a bundle comment, so an absolute one would leak the
+    // build machine's directory and make local and CI builds differ.
     build.onResolve({ filter: /\?worker$/ }, (args) => ({
-      path: path.resolve(args.resolveDir, args.path.slice(0, -"?worker".length)),
+      path: path.relative(process.cwd(), path.resolve(args.resolveDir, args.path.slice(0, -"?worker".length))),
       namespace: "inline-worker",
     }));
     build.onLoad({ filter: /.*/, namespace: "inline-worker" }, async (args) => {
       const result = await esbuild.build({
-        entryPoints: [args.path],
+        entryPoints: [path.resolve(args.path)],
         bundle: true,
         write: false,
         metafile: true,

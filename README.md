@@ -14,7 +14,13 @@ Your Markdown files only ever contain the reference, so notes can be synced, sha
 
 **English** · [한국어](README.ko.md)
 
-[Install](#install) · [Usage](#usage) · [How it works](#how-it-works) · [Privacy & security](#privacy--security) · [Limitations](#limitations)
+[Install](#install) · [Usage](#usage) · [Screenshots](#screenshots) · [How it works](#how-it-works) · [Privacy & security](#privacy--security) · [Limitations](#limitations)
+
+<br>
+
+<img src="docs/images/demo.gif" alt="Demo: reveal and copy a masked API key, then insert a new reference with {{bw: autocomplete" width="100%">
+
+<sub>Reveal → copy (the clipboard clears in 30 s) → type <code>{{bw:</code> to insert a reference (sample data)</sub>
 
 </div>
 
@@ -36,6 +42,36 @@ Your Markdown files only ever contain the reference, so notes can be synced, sha
 - **Vault sidebar**: search by name, username or URL, favorites and folders, per-field copy / reveal / insert, and TOTP codes with a countdown.
 - **Status bar lock** and **Unlock / Lock / Sync** commands.
 - **Bitwarden cloud (US, EU) and self-hosted servers**, personal and organization items.
+
+## Screenshots
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/note-dark.png">
+  <img src="docs/images/note-light.png" alt="A note whose secrets render as masked widgets, with one API key revealed" width="100%">
+</picture>
+
+<p align="center"><b>Notes</b> — references render as masked widgets you can reveal or copy</p>
+
+<table>
+  <tr>
+    <td width="62%" valign="top">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="docs/images/insert-dark.png">
+        <img src="docs/images/insert-light.png" alt="Insert secret reference: search items and fields, or insert a whole item">
+      </picture>
+      <p align="center"><b>Insert</b> — pick a field or a whole item, no syntax to remember</p>
+    </td>
+    <td width="38%" valign="top">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="docs/images/sidebar-dark.png">
+        <img src="docs/images/sidebar-light.png" alt="Vault sidebar with an item expanded: copy, reveal, insert, live TOTP code">
+      </picture>
+      <p align="center"><b>Sidebar</b> — browse, copy, insert, live TOTP</p>
+    </td>
+  </tr>
+</table>
+
+> Screenshots and the demo use made-up sample data.
 
 ## How it works
 

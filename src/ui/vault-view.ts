@@ -53,7 +53,7 @@ export class VaultView extends ItemView {
   }
 
   getDisplayText(): string {
-    return "Bitwarden";
+    return "BitLens";
   }
 
   getIcon(): string {

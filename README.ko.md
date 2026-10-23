@@ -14,7 +14,13 @@ Markdown 파일에는 참조 문자열만 저장됩니다. 노트를 동기화�
 
 [English](README.md) · **한국어**
 
-[설치](#설치) · [사용법](#사용법) · [동작 방식](#동작-방식) · [개인정보와 보안](#개인정보와-보안) · [제약 사항](#제약-사항)
+[설치](#설치) · [사용법](#사용법) · [스크린샷](#스크린샷) · [동작 방식](#동작-방식) · [개인정보와 보안](#개인정보와-보안) · [제약 사항](#제약-사항)
+
+<br>
+
+<img src="docs/images/demo.gif" alt="데모: 가려진 API 키를 보고 복사한 뒤, {{bw: 자동완성으로 새 참조를 넣는 과정" width="100%">
+
+<sub>값 보기 → 복사(30초 뒤 클립보드 삭제) → <code>{{bw:</code> 입력으로 참조 삽입 (가짜 예시 데이터)</sub>
 
 </div>
 
@@ -36,6 +42,36 @@ Markdown 파일에는 참조 문자열만 저장됩니다. 노트를 동기화�
 - **볼트 사이드바**: 이름·사용자명·URL 검색, 즐겨찾기와 폴더 묶음, 필드별 복사·보기·삽입, 남은 시간이 표시되는 TOTP 코드를 제공합니다.
 - **상태 표시줄 잠금 버튼**과 **Unlock / Lock / Sync** 명령을 제공합니다.
 - **Bitwarden 클라우드(US, EU)와 셀프 호스팅 서버**, 개인 아이템과 조직 아이템을 모두 지원합니다.
+
+## 스크린샷
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/note-dark.png">
+  <img src="docs/images/note-light.png" alt="비밀 값이 가린 위젯으로 표시되고 API 키 하나만 펼쳐진 노트" width="100%">
+</picture>
+
+<p align="center"><b>노트</b> — 참조가 가린 위젯으로 바뀌고, 필요할 때만 보거나 복사</p>
+
+<table>
+  <tr>
+    <td width="62%" valign="top">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="docs/images/insert-dark.png">
+        <img src="docs/images/insert-light.png" alt="Insert secret reference: 아이템과 필드를 검색하거나 아이템 전체를 삽입">
+      </picture>
+      <p align="center"><b>삽입</b> — 필드 하나나 아이템 전체를 골라 넣기, 문법 몰라도 됨</p>
+    </td>
+    <td width="38%" valign="top">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="docs/images/sidebar-dark.png">
+        <img src="docs/images/sidebar-light.png" alt="아이템을 펼친 볼트 사이드바: 복사, 보기, 삽입, 실시간 TOTP 코드">
+      </picture>
+      <p align="center"><b>사이드바</b> — 둘러보기, 복사, 삽입, 실시간 TOTP</p>
+    </td>
+  </tr>
+</table>
+
+> 스크린샷과 데모는 가짜 예시 데이터를 사용합니다.
 
 ## 동작 방식
 

@@ -1,0 +1,52 @@
+name: Release
+
+# Push a tag equal to manifest.json's version (no "v" prefix), e.g. `git tag 0.1.0 && git push origin 0.1.0`.
+on:
+  push:
+    tags: ["*"]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check tag matches manifest, package and versions.json
+        run: |
+          node -e '
+            const tag = process.env.GITHUB_REF_NAME;
+            const m = require("./manifest.json"), p = require("./package.json"), v = require("./versions.json");
+            const bad = [m.version !== tag && "manifest.json", p.version !== tag && "package.json", v[tag] !== m.minAppVersion && "versions.json"].filter(Boolean);
+            if (bad.length) { console.error(`tag ${tag} does not match: ${bad.join(", ")}`); process.exit(1); }'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm test
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: plugin
+          path: |
+            main.js
+            manifest.json
+            styles.css
+
+  # Only this job can write, and it runs no dependency code.
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: plugin
+      - name: Create draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh release create "$GITHUB_REF_NAME" --draft --title "$GITHUB_REF_NAME" --generate-notes main.js manifest.json styles.css

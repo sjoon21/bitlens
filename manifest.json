@@ -1,0 +1,10 @@
+{
+  "id": "bitlens",
+  "name": "BitLens",
+  "version": "0.1.0",
+  "minAppVersion": "1.11.4",
+  "description": "Reference Bitwarden passwords, API keys and TOTP codes in notes with {{bw:...}} placeholders. Values are decrypted locally, kept only in memory and shown as masked widgets.",
+  "author": "sjoon21",
+  "authorUrl": "https://github.com/sjoon21",
+  "isDesktopOnly": true
+}

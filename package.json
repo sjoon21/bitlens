@@ -1,0 +1,34 @@
+{
+  "name": "bitlens",
+  "version": "0.1.0",
+  "description": "Reference Bitwarden passwords, API keys and TOTP codes in notes with {{bw:...}} placeholders. Values are decrypted locally, kept only in memory and shown as masked widgets.",
+  "main": "main.js",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+    "test": "node --experimental-strip-types --no-warnings --test tests/*.test.ts"
+  },
+  "keywords": [
+    "obsidian",
+    "bitwarden",
+    "secrets",
+    "vault",
+    "api-keys"
+  ],
+  "author": "sjoon21",
+  "license": "MIT",
+  "devDependencies": {
+    "@codemirror/language": "^6.13.1",
+    "@codemirror/state": "6.5.0",
+    "@codemirror/view": "6.38.6",
+    "@types/node": "^20.11.0",
+    "builtin-modules": "^3.3.0",
+    "esbuild": "^0.20.0",
+    "obsidian": "1.11.4",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@noble/hashes": "2.4.0"
+  }
+}
